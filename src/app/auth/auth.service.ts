@@ -56,9 +56,17 @@ export class AuthService {
       .get<SignedinResponse>(`${this.rootUrl}/auth/signedin`)
       .pipe(
         tap(({ authenticated }) => {
-          console.log(authenticated);
+          // console.log(authenticated);
           this.signedin$.next(authenticated);
         })
       );
+  }
+
+  signout() {
+    return this.http.post(`${this.rootUrl}/auth/signout`, {}).pipe(
+      tap(() => {
+        this.signedin$.next(false);
+      })
+    );
   }
 }
