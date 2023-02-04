@@ -6,7 +6,7 @@ import {
   HttpRequest,
   HttpEventType,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, filter, tap } from 'rxjs';
 
 Injectable();
 export class AuthHttpInterceptor implements HttpInterceptor {
@@ -21,16 +21,12 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     const modifiedReq = req.clone({
       withCredentials: true,
     });
-    return next.handle(modifiedReq).pipe(
-      tap((val) => {
-        // console.log(val);
-        if (val.type === HttpEventType.Sent) {
-          console.log('Request was send to server');
-        }
-        if (val.type === HttpEventType.Response) {
-          console.log('Got a response from the API', val);
-        }
-      })
-    );
+    return next.handle(modifiedReq);
+    //   return next.handle(modifiedReq).pipe(
+    //     filter((val) => val.type === HttpEventType.Sent),
+    //     tap((val) => {
+    //       console.log('Sent the request');
+    //     })
+    //   );
   }
 }
