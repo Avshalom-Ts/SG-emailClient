@@ -13,22 +13,11 @@ export class UniqueUsername implements AsyncValidator {
   // }
   validate = (control: AbstractControl<any, any>) => {
     const { value } = control;
-    // console.log(this.http);
-    // return this.http
-    //   .post<any>('https://api.angular-email.com/auth/username', {
-    //     username: value,
-    //   })//Move To auth.service
-    //Insted
     return this.authService.usernameAvailable(value).pipe(
       map((value) => {
-        // console.log(value);
-        // if (value.available) {
-        //   return null;
-        // }//Anyway geting true if entering map
         return null;
       }),
       catchError((err) => {
-        // console.log(err);
         if (err.error.username) {
           return of({ nonUniqueUsername: true });
         } else {
