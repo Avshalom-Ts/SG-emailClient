@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
-import { FormControl } from '@angular/forms';
 
 interface usernameAvailableResponse {
   available: boolean;
