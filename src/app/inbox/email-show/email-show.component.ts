@@ -14,7 +14,12 @@ export class EmailShowComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private emailService: EmailService
-  ) {}
+  ) {
+    // console.log(this.route.snapshot.data);
+    this.route.data.subscribe(({ email }) => {
+      this.email = email;
+    });
+  }
 
   // ! way 1 with nested subscribe
   //? Its bad aproutch becose when new route will invoc by the user
@@ -33,15 +38,15 @@ export class EmailShowComponent implements OnInit {
   // ? if there will be anotheres invocs from the user the previus will canceld
   // ? and the amswer will be from the last invocet.
   ngOnInit(): void {
-    this.route.params
-      .pipe(
-        switchMap(({ id }) => {
-          return this.emailService.getEmail(id);
-        })
-      )
-      .subscribe((email) => {
-        // console.log(email);
-        this.email = email;
-      });
+    // this.route.params
+    //   .pipe(
+    //     switchMap(({ id }) => {
+    //       return this.emailService.getEmail(id);
+    //     })
+    //   )
+    //   .subscribe((email) => {
+    //     // console.log(email);
+    //     this.email = email;
+    //   });
   }
 }
