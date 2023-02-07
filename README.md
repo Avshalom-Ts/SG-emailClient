@@ -14,6 +14,8 @@ in style.css added @import 'semantic-ui-css/semantic.css'
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.5.
 
+Implementing reciving email to the created user is to `user-name@angular-email.com
+
 #### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
