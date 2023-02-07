@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Email } from '../email';
 
 @Component({
   selector: 'app-email-create',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailCreateComponent implements OnInit {
   showModal: boolean = false;
-  constructor() {}
+  email: Email;
+  constructor() {
+    this.email = {
+      id: '',
+      to: '',
+      subject: '',
+      html: '',
+      text: '',
+      from: 'avshalom@angular-email.com',
+    };
+  }
 
   ngOnInit(): void {}
 }
