@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Email } from '../email';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class EmailFormComponent implements OnInit {
   emailForm!: FormGroup | any;
   @Input() email!: Email;
+  @Output() emailSubmit = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {
@@ -20,5 +21,14 @@ export class EmailFormComponent implements OnInit {
       subject: new FormControl(subject, [Validators.required]),
       text: new FormControl(text, [Validators.required]),
     });
+  }
+
+  onSubmit() {
+    if (this.emailForm.invalid) return;
+    // ! Becouse the from value is marked as disable it will not be shown in the console..
+    // console.log(this.emailForm.value);
+    // ? To show it need to use the function getRawValue()
+    // console.log(this.emailForm.getRawValue());
+    this.emailSubmit.emit(this.emailForm.value);
   }
 }
