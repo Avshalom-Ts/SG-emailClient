@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class EmailFormComponent implements OnInit {
   emailForm!: FormGroup | any;
-  @Input() email!: Email;
+  @Input() email!: Email | any;
   @Output() emailSubmit = new EventEmitter();
   constructor() {}
 
